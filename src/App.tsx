@@ -1,10 +1,15 @@
+import { Navbar } from "./components"
+import { Hero, Shop, Categories } from "./sections"
 
 const App = () => {
 
   return (
     <>
       <div>
-        <p className='font-bold text-2xl'>Duka Loco</p>
+        <Navbar />
+        <Hero />
+        <Shop />
+        <Categories />
       </div>
     </>
   )
