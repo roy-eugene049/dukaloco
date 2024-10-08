@@ -63,7 +63,7 @@ const Hero = () => {
   }
 
   return (
-    <div className="relative bg-white h-screen flex items-center overflow-hidden">
+    <div className="relative bg-white h-screen flex items-center overflow-hidden max-w-6xl mx-auto px-4 py-8">
       <div className="absolute top-0 right-0 text-gray-100 text-[200px] font-bold opacity-20 pointer-events-none">
         Speakers
       </div>

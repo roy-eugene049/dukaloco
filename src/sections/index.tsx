@@ -1,3 +1,6 @@
 export { default as Hero } from './Hero'
 export { default as Shop } from './Shop'
 export { default as Categories } from './Categories'
+export { default as Bentogrid } from './Bentogrid'
+export { default as Banner } from './Banner'
+export { default as VideoCarousel } from './VideoCarousel'

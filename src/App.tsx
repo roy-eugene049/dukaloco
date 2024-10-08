@@ -1,5 +1,5 @@
-import { Navbar } from "./components"
-import { Hero, Shop, Categories } from "./sections"
+import { Navbar, Footer } from "./components"
+import { Hero, Shop, Categories, Bentogrid, Banner, VideoCarousel } from "./sections"
 
 const App = () => {
 
@@ -10,6 +10,10 @@ const App = () => {
         <Hero />
         <Shop />
         <Categories />
+        <Bentogrid />
+        <Banner />
+        <VideoCarousel />
+        <Footer />
       </div>
     </>
   )
