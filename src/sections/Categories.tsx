@@ -31,6 +31,7 @@ const Categories: React.FC<CategoriesProps> = ({ onProductSelect }) => {
   };
 
   const handleShopNow = (product: Product) => {
+    onProductSelect(product);
     navigate('/products', { state: { product } });
   };
 
