@@ -1,27 +1,24 @@
+import React, { useState, useEffect } from 'react'
+import { ChevronRight } from 'lucide-react'
+import { Product } from './App'
 
-import { useState, useEffect } from "react";
-import { ChevronRight } from "lucide-react";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
+interface CategoriesProps {
+  onProductSelect: (product: Product) => void
 }
 
-const Categories = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+const Categories: React.FC<CategoriesProps> = ({ onProductSelect }) => {
+  const [products, setProducts] = useState<Product[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
       .then((res) => res.json())
-      .then((data) => setProducts(data.products.slice(0, 3)));
-  }, []);
+      .then((data) => setProducts(data.products.slice(0, 3)))
+  }, [])
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
-  };
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length)
+  }
 
   return (
     <div className="flex justify-center items-stretch w-full max-w-6xl mx-auto px-4 py-8 relative mt-12">
@@ -34,7 +31,10 @@ const Categories = () => {
                 <p className="text-sm text-gray-500 mb-1">Starting from</p>
                 <p className="text-2xl font-bold text-[#3B82F6] mb-4">${product.price.toFixed(2)}</p>
               </div>
-              <button className="bg-[#D1F366] hover:bg-[#C1E356] text-black py-2 px-4 rounded-full flex items-center justify-center space-x-2 w-40">
+              <button
+                className="bg-[#D1F366] hover:bg-[#C1E356] text-black py-2 px-4 rounded-full flex items-center justify-center space-x-2 w-40"
+                onClick={() => onProductSelect(product)}
+              >
                 <span className="text-sm font-semibold">Shop now</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -51,15 +51,15 @@ const Categories = () => {
       ))}
       <div className="absolute inset-y-0 right-0 flex items-center">
         <button
-            onClick={handleNext}
-            className="bg-[#CDFB51] rounded-full p-2 shadow-md z-10"
-            aria-label="Next product"
+          onClick={handleNext}
+          className="bg-[#CDFB51] rounded-full p-2 shadow-md z-10"
+          aria-label="Next product"
         >
-            <ChevronRight className="w-6 h-4" />
+          <ChevronRight className="w-6 h-4" />
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Categories;
+export default Categories
