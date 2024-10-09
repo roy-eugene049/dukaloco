@@ -1,65 +1,74 @@
-import React, { useState, useEffect } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import { Product } from '../types/Product'
+import React, { useState, useEffect } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { Product } from '../types/Product';
 
 interface ProductsProps {
-  selectedProduct: Product | null
+  selectedProduct: Product | null;
 }
 
 const Products: React.FC<ProductsProps> = ({ selectedProduct }) => {
-  const [products, setProducts] = useState<Product[]>([])
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [filters, setFilters] = useState({
     inStock: false,
     outOfStock: false,
     priceRange: [0, Infinity],
     brand: '',
-  })
+  });
+
+  const { addToCart } = useCart();  // Access the cart context
+  const navigate = useNavigate();   // For navigating to ProductDetail
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
       .then(res => res.json())
       .then(data => {
-        setProducts(data.products)
-        setFilteredProducts(data.products)
-      })
-  }, [])
+        setProducts(data.products);
+        setFilteredProducts(data.products);
+      });
+  }, []);
 
   useEffect(() => {
-    let result = products
+    let result = products;
 
     if (filters.inStock) {
-      result = result.filter(product => product.stock > 0)
+      result = result.filter(product => product.stock > 0);
     }
     if (filters.outOfStock) {
-      result = result.filter(product => product.stock === 0)
+      result = result.filter(product => product.stock === 0);
     }
     result = result.filter(
       product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
-    )
+    );
     if (filters.brand) {
-      result = result.filter(product => product.brand.toLowerCase().includes(filters.brand.toLowerCase()))
+      result = result.filter(product => product.brand.toLowerCase().includes(filters.brand.toLowerCase()));
     }
 
-    setFilteredProducts(result)
-  }, [filters, products])
+    setFilteredProducts(result);
+  }, [filters, products]);
 
   const handleSort = () => {
     const sorted = [...filteredProducts].sort((a, b) => {
       if (sortOrder === 'asc') {
-        return a.title.localeCompare(b.title)
+        return a.title.localeCompare(b.title);
       } else {
-        return b.title.localeCompare(a.title)
+        return b.title.localeCompare(a.title);
       }
-    })
-    setFilteredProducts(sorted)
-    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
-  }
+    });
+    setFilteredProducts(sorted);
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
 
   const handleFilterChange = (filterType: string, value: boolean | number[] | string) => {
-    setFilters(prev => ({ ...prev, [filterType]: value }))
-  }
+    setFilters(prev => ({ ...prev, [filterType]: value }));
+  };
+
+  const handleProductClick = (product: Product) => {
+    navigate(`/product/${product.id}`, { state: { product } });  // Navigate to ProductDetail
+  };
 
   const renderProductDetails = (product: Product) => (
     <div className="bg-white p-6 rounded-lg shadow-md">
@@ -71,11 +80,14 @@ const Products: React.FC<ProductsProps> = ({ selectedProduct }) => {
       <p className="mb-2">Category: {product.category}</p>
       <p className="mb-2">Rating: {product.rating}/5</p>
       <p className="mb-4">Stock: {product.stock}</p>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+      <button
+        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        onClick={() => addToCart(product)}  // Add to cart action
+      >
         Add to Cart
       </button>
     </div>
-  )
+  );
 
   return (
     <div className="mt-12">
@@ -140,10 +152,7 @@ const Products: React.FC<ProductsProps> = ({ selectedProduct }) => {
               <p className="text-sm text-gray-600">
                 Showing {filteredProducts.length} of {products.length} Products
               </p>
-              <button
-                className="flex items-center text-sm font-medium"
-                onClick={handleSort}
-              >
+              <button className="flex items-center text-sm font-medium" onClick={handleSort}>
                 Sort by: Alphabetically, A-Z
                 {sortOrder === 'asc' ? (
                   <ChevronDown className="ml-1 w-4 h-4" />
@@ -154,7 +163,11 @@ const Products: React.FC<ProductsProps> = ({ selectedProduct }) => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map(product => (
-                <div key={product.id} className="border rounded-lg overflow-hidden shadow-sm">
+                <div
+                  key={product.id}
+                  className="border rounded-lg overflow-hidden shadow-sm cursor-pointer"
+                  onClick={() => handleProductClick(product)}  // Navigate to product detail
+                >
                   <div className="relative pb-[56.25%]">
                     <img
                       src={product.thumbnail}
@@ -181,7 +194,7 @@ const Products: React.FC<ProductsProps> = ({ selectedProduct }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

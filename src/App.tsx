@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Navbar, Footer, ProductDetail, LoginForm } from "./components"
-import { Hero, Shop, Categories, Bentogrid, Banner, VideoCarousel, BestSelling, Featured, Products } from "./sections"
+import { Hero, Shop, Categories, Bentogrid, Banner, VideoCarousel, BestSelling, Featured, Products, Cart } from "./sections"
 import { Product } from './types/Product'
 
 const App = () => {
@@ -33,7 +33,8 @@ const App = () => {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/products" element={<Products selectedProduct={selectedProduct} />} />
           <Route path="/" element={<Categories onProductSelect={() => {}} />} />
-          <Route path="/products" element={<ProductDetail />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </div>

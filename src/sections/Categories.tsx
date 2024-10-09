@@ -13,26 +13,32 @@ const Categories: React.FC<CategoriesProps> = ({ onProductSelect }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Fetch products from the API
     fetch('https://dummyjson.com/products')
       .then((res) => res.json())
-      .then((data) => setProducts(data.products.slice(0, 10))); // Fetch 10 products
+      .then((data) => setProducts(data.products.slice(0, 10)));  // Fetch 10 products
   }, []);
 
+  // Navigate to the next set of products in the carousel
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex + 3 >= products.length ? 0 : prevIndex + 3
     );
   };
 
+  // Navigate to the previous set of products in the carousel
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex - 3 < 0 ? products.length - 3 : prevIndex - 3
     );
   };
 
+  // Navigate to the product details page when a product is clicked
   const handleShopNow = (product: Product) => {
-    onProductSelect(product);
-    navigate('/products', { state: { product } });
+    if (product) {
+      onProductSelect(product);  // Trigger the callback to set the selected product
+      navigate(`/product/${product.id}`, { state: { product } });  // Navigate to product detail page
+    }
   };
 
   return (

@@ -1,13 +1,14 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Product } from '../types/Product';
 
 const ProductDetail: React.FC = () => {
   const location = useLocation();
-  const product: Product | undefined = location.state?.product;
+  const { product }: { product: Product } = location.state || {};
+  const { id } = useParams();
 
   if (!product) {
-    return <div>Product not found.</div>;
+    return <div>Product not found for ID {id}.</div>;
   }
 
   return (

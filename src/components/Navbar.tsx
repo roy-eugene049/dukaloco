@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ChevronDown, User, ShoppingCart, X, Menu } from 'lucide-react';
+import { useCart } from '../context/CartContext';  // Import useCart for cart management
 
 interface Product {
   id: number;
@@ -13,12 +14,13 @@ interface SearchResults {
   products: Product[];
 }
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResults | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false); // Mobile menu state
-  const navigate = useNavigate(); 
+  const { cartItems } = useCart();  // Access the cart context to get cart items
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -46,7 +48,7 @@ const Navbar = () => {
   }, [searchQuery]);
 
   const handleUserIconClick = () => {
-    navigate('/login'); 
+    navigate('/login');  // Navigate to login page
   };
 
   const toggleMenu = () => {
@@ -132,6 +134,8 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+
+            {/* User Icon */}
             <button
               type="button"
               onClick={handleUserIconClick}
@@ -139,13 +143,16 @@ const Navbar = () => {
             >
               <User className="h-6 w-6" />
             </button>
+
+            {/* Shopping Cart Icon */}
             <button
               type="button"
+              onClick={() => navigate('/cart')}  // Navigate to Cart page
               className="relative p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
               <ShoppingCart className="h-6 w-6" />
               <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-white transform translate-x-1/2 -translate-y-1/2 bg-green-500 rounded-full">
-                1
+                {cartItems.length}  {/* Display the number of items in the cart */}
               </span>
             </button>
           </div>
