@@ -8,7 +8,7 @@ interface CartContextProps {
   clearCart: () => void;
 }
 
-// Define a type for the children prop
+// Correctly type the children prop
 interface CartProviderProps {
   children: ReactNode;
 }
@@ -32,7 +32,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
-      {children} {/* Render the nested components */}
+      {children}  {/* Render the children passed to the provider */}
     </CartContext.Provider>
   );
 };
