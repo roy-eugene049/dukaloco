@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { Product } from '../types/Product';
 
 interface CartContextProps {
@@ -8,17 +8,22 @@ interface CartContextProps {
   clearCart: () => void;
 }
 
+// Define a type for the children prop
+interface CartProviderProps {
+  children: ReactNode;
+}
+
 export const CartContext = createContext<CartContextProps | undefined>(undefined);
 
-export const CartProvider: React.FC = ({ children }) => {
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
 
   const addToCart = (product: Product) => {
-    setCartItems(prevItems => [...prevItems, product]);
+    setCartItems((prevItems) => [...prevItems, product]);
   };
 
   const removeFromCart = (productId: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
   const clearCart = () => {
@@ -27,7 +32,7 @@ export const CartProvider: React.FC = ({ children }) => {
 
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
-      {children}
+      {children} {/* Render the nested components */}
     </CartContext.Provider>
   );
 };
