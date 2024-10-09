@@ -1,50 +1,70 @@
-# React + TypeScript + Vite
+# DukaLoco - E-Commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DukaLoco is a modern e-commerce web application designed to provide a seamless shopping experience. It features searching, sorting, and filtering of products, ensuring users can easily navigate and find what they're looking for.
 
-Currently, two official plugins are available:
+This project is built using **React**, **React Router**, **TailwindCSS**, **Vite**, and **TypeScript**, offering a scalable, fast, and responsive user interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Product Search**: Users can search for products dynamically.
+- **Sorting**: Products can be sorted by various parameters like price, rating, etc.
+- **Filtering**: Filter products by category, price range, and more.
+- **Responsive Design**: The application is responsive and works across multiple screen sizes.
+- **Carousel Support**: Includes product carousels and video integrations.
+- **Clean UI**: Styled using TailwindCSS for fast, clean, and consistent design.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **React**: A JavaScript library for building user interfaces.
+- **React Router**: Enables dynamic routing in the application.
+- **TailwindCSS**: A utility-first CSS framework for rapid UI development.
+- **Vite**: A fast frontend build tool and development server.
+- **TypeScript**: Superset of JavaScript which adds static typing to enhance code quality.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation and Setup
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone the repository:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```bash
+   git clone https://github.com/roy-eugene049/dukaloco.git
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Navigate to the project directory:
+
+```cd dukaloco
+
+Install dependencies:
+
+```npm install
+
+Run the development server:
+
+```npm run dev
+
+Open your browser and navigate to:
+
+http://localhost:5173
+
+##Project Structure
+
+The project's main structure is as follows:
+
+├── src
+│   ├── assets         # Static assets (images, videos)
+│   ├── components     # Reusable UI components
+│   ├── sections       # Main page components (Home, Products, etc.)
+│   ├── types          # TypeScript type definitions
+│   ├── App.tsx        # Main app component
+│   ├── main.tsx       # Application entry point
+│   └── ...
+├── public             # Static public files
+├── tailwind.config.js # Tailwind CSS configuration
+├── tsconfig.json      # TypeScript configuration
+├── vite.config.ts     # Vite configuration
+└── ...
+
+Deployment
+For deployment, you can build the project using:
+
+npm run build
+
+This will create an optimized production build in the dist folder, which can then be deployed to any static hosting provider like Vercel, Netlify, etc.
