@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Navbar, Footer } from "./components"
+import { Navbar, Footer, ProductDetail, LoginForm } from "./components"
 import { Hero, Shop, Categories, Bentogrid, Banner, VideoCarousel, BestSelling, Featured, Products } from "./sections"
 import { Product } from './types/Product'
 
@@ -30,7 +30,10 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<MainContent />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/products" element={<Products selectedProduct={selectedProduct} />} />
+          <Route path="/" element={<Categories onProductSelect={() => {}} />} />
+          <Route path="/products" element={<ProductDetail />} />
         </Routes>
         <Footer />
       </div>

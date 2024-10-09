@@ -25,13 +25,11 @@ const Banner = () => {
 
   return (
     <div className="w-full overflow-hidden bg-white text-blue-900 py-4 mt-12">
-      <div 
+      <div
         ref={bannerRef}
-        className="whitespace-nowrap text-xl font-bold"
-        style={{ width: '200%' }}
+        className="whitespace-nowrap text-xl font-bold animate-marquee"
       >
-        <span className="inline-block w-1/2">{repeatedText}</span>
-        <span className="inline-block w-1/2">{repeatedText}</span>
+        <span className="inline-block">{repeatedText}</span>
       </div>
     </div>
   );

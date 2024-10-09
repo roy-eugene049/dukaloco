@@ -10,16 +10,17 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-50 text-gray-600 py-12 px-4">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-        <div className="space-y-4">
+    <footer className="bg-gray-50 text-gray-600 py-12 px-4 lg:px-12">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        {/* Duka Loco Section */}
+        <div className="space-y-6 lg:space-y-8">
           <h2 className="text-xl font-bold text-gray-800">Duka Loco</h2>
-          <p className="text-sm">
+          <p className="text-sm leading-relaxed">
             We have it all under one roof. Our carefully curated collection includes products from renowned brands known for their quality and reliability.
           </p>
-          <div className="space-y-2">
+          <div className="space-y-4">
             <h3 className="font-semibold">Subscribe to our emails</h3>
-            <form onSubmit={handleSubmit} className="flex">
+            <form onSubmit={handleSubmit} className="flex max-w-sm">
               <input
                 type="email"
                 value={email}
@@ -46,7 +47,8 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        
+
+        {/* Popular Collections */}
         <div>
           <h3 className="font-semibold mb-4">Popular collections</h3>
           <ul className="space-y-2">
@@ -57,7 +59,8 @@ const Footer = () => {
             ))}
           </ul>
         </div>
-        
+
+        {/* Information */}
         <div>
           <h3 className="font-semibold mb-4">Information</h3>
           <ul className="space-y-2">
@@ -68,7 +71,8 @@ const Footer = () => {
             ))}
           </ul>
         </div>
-        
+
+        {/* Go Through */}
         <div>
           <h3 className="font-semibold mb-4">Go through</h3>
           <ul className="space-y-2">
@@ -79,7 +83,8 @@ const Footer = () => {
             ))}
           </ul>
         </div>
-        
+
+        {/* Find it Here */}
         <div>
           <h3 className="font-semibold mb-4">Find it here</h3>
           <ul className="space-y-2">
@@ -87,7 +92,8 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      
+
+      {/* Payment Icons */}
       <div className="mt-12 text-center">
         <p className="text-sm mb-4">We accept:</p>
         <div className="flex justify-center space-x-4">
@@ -96,7 +102,8 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      
+
+      {/* Copyright Section */}
       <div className="mt-8 text-center text-sm">
         <p>© Copyright 2024, Duka Loco</p>
       </div>
