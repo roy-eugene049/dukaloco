@@ -9,7 +9,7 @@ const VideoCarousel = () => {
           playsInline
         >
           <source
-            src="/src/assets/hph.mp4"
+            src="/hph.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
